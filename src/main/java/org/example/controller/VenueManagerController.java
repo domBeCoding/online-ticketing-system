@@ -5,6 +5,9 @@ import org.example.exception.NoSuchMovieException;
 import org.example.generator.DateGenerator;
 import org.example.model.Movie;
 import org.example.service.MovieService;
+import org.example.validator.DeleteMovieValidator;
+import org.example.validator.EditMovieValidator;
+import org.example.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -131,11 +134,21 @@ public class VenueManagerController {
             printSpace();
             printMessage("Please enter the (name) of the movie you'd like to delete");
             String movieName = read();
-            movies.add(movieName);
 
-            printMessage("Would you like to remove another movie? (y/n)");
-            if (!readYesOrNo()) {
+            try{
+                DeleteMovieValidator.validate(movieName);
+                movies.add(movieName);
                 finishAddingMovie = true;
+            } catch (IllegalArgumentException e) {
+                printSpace();
+                printMessage("Movie removed unsuccessfully");
+                printMessage(e.getMessage());
+
+                printSpace();
+                printMessage("Would you like to remove another movie? (y/n)");
+                if (!readYesOrNo()) {
+                    finishAddingMovie = true;
+                }
             }
         }
 
@@ -168,6 +181,22 @@ public class VenueManagerController {
             printMessage("Please enter the new value of " + "(" + field + ")");
             String value = read();
 
+            try{
+
+                EditMovieValidator.validate(movieName, field, value);
+            } catch (IllegalArgumentException e) {
+                printSpace();
+                printMessage("Movie edited unsuccessfully");
+                printMessage(e.getMessage());
+
+                printSpace();
+                printMessage("Would you like to edit another Movie? (y/n)");
+
+                if (!readYesOrNo()) {
+                    finishedEditingMovie = true;
+                }
+                continue;
+            }
 
             try {
                 printSpace();

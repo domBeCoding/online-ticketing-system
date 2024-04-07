@@ -10,6 +10,7 @@ import org.example.service.MovieService;
 import org.example.validator.CardValidator;
 import org.example.validator.SeatValidator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +54,17 @@ public class CustomerController {
             default:
                 break;
         }
+    }
+
+    private void getMoviesController() {
+        printHeaderMessage("Movies available:");
+        movieService.getMovies()
+                .forEach(x -> {
+                    printSpace();
+                    System.out.println("Movie: " + x.getName());
+                    printMessage("Date: " + x.getAvailableDates());
+                    printMessage("Time: " + x.getAvailableTimes());
+                });
     }
 
     private void buyTicketsController() {
@@ -128,8 +140,6 @@ public class CustomerController {
                         Transaction transaction = new Transaction(movie.getPrice() * seats.size(), cardNumber, cardPin);
 
                         customerService.buyTicket(movieName, newBooking, transaction);
-                        seats.forEach(cinemaService::bookSeat);
-                        movieService.addBooking(movieName, new Booking(date,time,seats));
                     } catch (NoSuchAccountException | IllegalArgumentException e) {
                         printMessage(e.getMessage());
                         printMessage("Please try again");
@@ -137,6 +147,16 @@ public class CustomerController {
                     }
                     madePayment = true;
                 }
+            }
+
+            try{
+                Booking newBooking = new Booking(date, time, seats);
+                customerService.addTicket(movieName, newBooking);
+                seats.forEach(cinemaService::bookSeat);
+                movieService.addBooking(movieName, new Booking(date,time,seats));
+            } catch (RuntimeException e) {
+                printMessage(e.getMessage());
+                continue;
             }
 
             printSpace();
@@ -157,16 +177,5 @@ public class CustomerController {
         printHeaderMessage("Your tickets:");
         if (tickets.isEmpty()) printMessage("No tickets found");
         tickets.forEach(x -> printMessage(x.toString()));
-    }
-
-    private void getMoviesController() {
-        printHeaderMessage("Movies available:");
-        movieService.getMovies()
-                .forEach(x -> {
-                    printSpace();
-                    System.out.println("Movie: " + x.getName());
-                    printMessage("Date: " + x.getAvailableDates());
-                    printMessage("Time: " + x.getAvailableTimes());
-                });
     }
 }

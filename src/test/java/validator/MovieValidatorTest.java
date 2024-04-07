@@ -9,7 +9,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MovieValidatorTest {
-
     @Test
     public void doesNotThrow_whenAllFieldsValid() {
         assertDoesNotThrow(() -> MovieValidator.validateFields(

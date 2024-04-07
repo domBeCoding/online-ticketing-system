@@ -55,7 +55,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void buyTicketForNonExistingUserIdSuccessful() {
+    public void buyTicketForNonExistingUserIdSuccessful_throwsException() {
         customerService = new CustomerService(new Customer("Dominic", "dom@email.com", "non_existent_user", "password", 343242, 1234));
 
         Booking booking = new Booking("05-01-97", "12:00", List.of("2A", "2B"));
@@ -111,6 +111,50 @@ public class CustomerServiceTest {
                         "Non_Existent_Movie",
                         booking,
                         transaction
+                )).getMessage();
+
+        assertEquals("Movie not found: Non_Existent_Movie", exceptionMessage);
+    }
+    @Test
+    public void addTicketForExistingUserIdSuccessful() {
+
+        Booking booking = new Booking("05-01-97", "12:00", List.of("2A", "2B"));
+
+        assertDoesNotThrow(() -> customerService.addTicket(
+                "The Matrix",
+                booking));
+
+        Ticket expectedTicket = new Ticket("The Matrix", "12:00", "05-01-97", List.of("2A", "2B"), 15.00);
+
+        List<Ticket> tickets = customerService.getTickets("Dominic_user");
+        assertEquals(List.of(expectedTicket), tickets);
+    }
+
+    @Test
+    public void addTicketForNonExistingUserId_throwsExpcetion() {
+        customerService = new CustomerService(new Customer("Dominic", "dom@email.com", "non_existent_user", "password", 343242, 1234));
+
+        Booking booking = new Booking("05-01-97", "12:00", List.of("2A", "2B"));
+        Transaction transaction = new Transaction(30.00, "343242", "1234");
+
+        String exceptionMessage = assertThrows(NoSuchAccountException.class, () -> customerService.addTicket(
+                "The Matrix",
+                booking)).getMessage();
+
+        assertEquals("Customer not found for userId: non_existent_user", exceptionMessage);
+    }
+
+    @Test
+    public void throwsExceptionWhenAddTicketForNonExistingMovie() {
+
+        Booking booking = new Booking("05-01-97", "12:00", List.of("2A", "2B"));
+        Transaction transaction = new Transaction(30.00, "343242", "1234");
+
+
+        String exceptionMessage = assertThrows(NoSuchMovieException.class,
+                () -> customerService.addTicket(
+                        "Non_Existent_Movie",
+                        booking
                 )).getMessage();
 
         assertEquals("Movie not found: Non_Existent_Movie", exceptionMessage);

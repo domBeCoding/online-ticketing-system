@@ -36,6 +36,18 @@ public class CustomerService {
         writer.addTicket(customer.getUserId(), ticket);
     }
 
+    public void addTicket(String movieName, Booking newBooking) {
+        Movie movie = getMovie(movieName);
+
+        Ticket ticket = createTicket(
+                movie,
+                newBooking.getTime(),
+                newBooking.getDate(),
+                newBooking.getSeats());
+
+        writer.addTicket(customer.getUserId(), ticket);
+    }
+
     public List<Ticket> getTickets(String userId) {
         return reader.getTickets(userId);
     }

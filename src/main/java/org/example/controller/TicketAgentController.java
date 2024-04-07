@@ -51,7 +51,6 @@ public class TicketAgentController {
             if (readYesOrNo()) {
                 continue;
             }
-            ;
 
             finishedBuying = true;
         }
@@ -87,6 +86,7 @@ public class TicketAgentController {
     private void getAllTickets() {
         printSpace();
         printMessage("All Purchased tickets:");
+        printSpace();
         managementService.getCustomers().forEach(customer -> {
             System.out.println(customer.getUserId() + ":");
             System.out.println(customer.getPurchasedTickets());
