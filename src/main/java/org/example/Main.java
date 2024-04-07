@@ -14,13 +14,6 @@ public class Main {
 
     public static void main(String[] args) {
         Main app = new Main();
-
-//        printSpace();
-//        Cinema cinema = new Cinema(5, 10);
-//        cinema.populateSeats();
-//        cinema.displaySeats();
-
-
         app.start();
     }
 
@@ -42,9 +35,5 @@ public class Main {
     printHeaderMessage("Welcome " + sessionAccount.getName() + ", you have logged in as a " + sessionAccount.getClass().getSimpleName());
     accountController = new AccountController(sessionAccount);
     accountController.selectAccountMenuPrompt();
-
-
     }
-
-
 }

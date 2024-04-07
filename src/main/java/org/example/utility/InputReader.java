@@ -11,13 +11,7 @@ public class InputReader {
         return scanner.nextLine().trim();
     }
 
-//    public static int readInt(){
-//        return scanner.nextLine();
-//    }
-
     public static String readWithSetOptions(int options){
-
-        //TODO test what happens if String passed in
         String input = scanner.nextLine().trim();
         int i = Integer.parseInt(input);
 

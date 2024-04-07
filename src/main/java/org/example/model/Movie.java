@@ -104,18 +104,4 @@ public class Movie{
     public int hashCode() {
         return Objects.hash(name, length, rating, price);
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Movie movie = (Movie) o;
-//        return length == movie.length && rating == movie.rating && Objects.equals(name, movie.name);
-//    }
-
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(name, length, rating);
-//    }
-
 }

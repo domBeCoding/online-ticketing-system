@@ -44,26 +44,4 @@ public class FileDeleter<T> {
             throw new RuntimeException(e);
         }
     }
-
-//    public void remove(List<String> removeList) {
-//
-//        try {
-//            currentList = mapper.readValue(new File(filePath), listType);
-//
-//            List<T> absentElements = removeList
-//                    .stream()
-//                    .filter(x -> !currentList.stream().toList().contains(x))
-//                    .toList();
-//
-//            if (!absentElements.isEmpty()) {
-//                throw new NoSuchMovieException("Delete failure: Following elements not present in database:" + absentElements);
-//            }
-//
-//            currentList.removeAll(removeList);
-//            mapper.writeValue(new File(filePath), currentList);
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

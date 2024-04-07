@@ -19,7 +19,6 @@ public class AccountController {
         this.sessionAccount = account;
         venueManagerController = new VenueManagerController();
         ticketAgentController = new TicketAgentController();
-//        customerController = new CustomerController();
     }
 
     private final List<String> customerOptions = List.of(
