@@ -1,0 +1,53 @@
+[
+  {
+    "name": "The Matrix",
+    "price": 15.0,
+    "length": 120,
+    "rating": 5,
+    "availableTimes": [
+      "12:00",
+      "19:00"
+    ],
+    "availableDates": [
+      "05-01-25",
+      "06-01-25"
+    ],
+    "bookings": [
+        {
+            "date": "05-01-25",
+            "time": "12:00",
+            "seats": ["2A", "2B", "2C"]
+        }
+    ]
+  },
+  {
+    "name": "Dune",
+    "price": 15.0,
+    "length": 120,
+    "rating": 5,
+    "availableTimes": [
+      "12:00",
+      "19:00"
+    ],
+    "availableDates": [
+      "05-01-25",
+      "06-01-25"
+    ],
+    "bookings": []
+  },
+  {
+    "name": "Harry Potter",
+    "price": 15.0,
+    "length": 120,
+    "rating": 5,
+    "availableTimes": [
+      "12:00",
+      "19:00"
+    ],
+    "availableDates": [
+      "05-01-25",
+      "06-01-25"
+    ],
+    "bookings": []
+  }
+]

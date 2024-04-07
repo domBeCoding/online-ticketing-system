@@ -1,0 +1,9 @@
+[
+  {
+    "name": "John",
+    "email": "john@email.com",
+    "userId": "John_user",
+    "password": "password",
+    "cardNumber": 0
+  }
+]
