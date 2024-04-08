@@ -161,7 +161,7 @@ public class VenueManagerController {
             for (String movie : movies) {
                 printMessage(movie);
             }
-        } catch (NoSuchMovieException e) {
+        } catch (RuntimeException e) {
             printMessage("Remove movies unsuccessful.");
             System.out.println(e.getMessage());
         }
