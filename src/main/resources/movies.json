@@ -1,1 +1,158 @@
-[{"name":"Ghostbusters","price":10.0,"length":60,"rating":5,"availableTimes":["14:00","21:00"],"availableDates":["15-01-25","16-01-25"],"bookings":[{"date":"15-01-25","time":"14:00","seats":["1A","5B","4D"]},{"date":"15-01-25","time":"21:00","seats":["4B","2C","3B"]},{"date":"16-01-25","time":"14:00","seats":["2A","4B","3D"]},{"date":"16-01-25","time":"21:00","seats":["5B","1C","4B"]}]},{"name":"Dune","price":10.0,"length":60,"rating":5,"availableTimes":["15:00","20:00"],"availableDates":["20-01-25","21-01-25"],"bookings":[{"date":"20-01-25","time":"15:00","seats":["1A","5B","4D"]},{"date":"20-01-25","time":"20:00","seats":["4B","2C","3B"]},{"date":"21-01-25","time":"15:00","seats":["2A","4B","3D"]},{"date":"21-01-25","time":"20:00","seats":["5B","3C","4B"]}]},{"name":"Civil War","price":10.0,"length":60,"rating":5,"availableTimes":["16:00","23:00"],"availableDates":["25-01-25","26-01-25"],"bookings":[{"date":"25-01-25","time":"16:00","seats":["1A","5B","4D"]},{"date":"25-01-25","time":"23:00","seats":["4B","2C","3B"]},{"date":"26-01-25","time":"16:00","seats":["2A","4B","3D"]},{"date":"26-01-25","time":"23:00","seats":["5B","3C","4B"]}]}]
+[
+  {
+    "name": "Ghostbusters",
+    "price": 10.0,
+    "length": 60,
+    "rating": 5,
+    "availableTimes": [
+      "14:00",
+      "21:00"
+    ],
+    "availableDates": [
+      "15-01-25",
+      "16-01-25"
+    ],
+    "bookings": [
+      {
+        "date": "15-01-25",
+        "time": "14:00",
+        "seats": [
+          "1A",
+          "5B",
+          "4D"
+        ]
+      },
+      {
+        "date": "15-01-25",
+        "time": "21:00",
+        "seats": [
+          "4B",
+          "2C",
+          "3B"
+        ]
+      },
+      {
+        "date": "16-01-25",
+        "time": "14:00",
+        "seats": [
+          "2A",
+          "4B",
+          "3D"
+        ]
+      },
+      {
+        "date": "16-01-25",
+        "time": "21:00",
+        "seats": [
+          "5B",
+          "1C",
+          "4B"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dune",
+    "price": 10.0,
+    "length": 60,
+    "rating": 5,
+    "availableTimes": [
+      "15:00",
+      "20:00"
+    ],
+    "availableDates": [
+      "20-01-25",
+      "21-01-25"
+    ],
+    "bookings": [
+      {
+        "date": "20-01-25",
+        "time": "15:00",
+        "seats": [
+          "1A",
+          "5B",
+          "4D"
+        ]
+      },
+      {
+        "date": "20-01-25",
+        "time": "20:00",
+        "seats": [
+          "4B",
+          "2C",
+          "3B"
+        ]
+      },
+      {
+        "date": "21-01-25",
+        "time": "15:00",
+        "seats": [
+          "2A",
+          "4B",
+          "3D"
+        ]
+      },
+      {
+        "date": "21-01-25",
+        "time": "20:00",
+        "seats": [
+          "5B",
+          "3C",
+          "4B"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Civil War",
+    "price": 10.0,
+    "length": 60,
+    "rating": 5,
+    "availableTimes": [
+      "16:00",
+      "23:00"
+    ],
+    "availableDates": [
+      "25-01-25",
+      "26-01-25"
+    ],
+    "bookings": [
+      {
+        "date": "25-01-25",
+        "time": "16:00",
+        "seats": [
+          "1A",
+          "5B",
+          "4D"
+        ]
+      },
+      {
+        "date": "25-01-25",
+        "time": "23:00",
+        "seats": [
+          "4B",
+          "2C",
+          "3B"
+        ]
+      },
+      {
+        "date": "26-01-25",
+        "time": "16:00",
+        "seats": [
+          "2A",
+          "4B",
+          "3D"
+        ]
+      },
+      {
+        "date": "26-01-25",
+        "time": "23:00",
+        "seats": [
+          "5B",
+          "3C",
+          "4B"
+        ]
+      }
+    ]
+  }
+]

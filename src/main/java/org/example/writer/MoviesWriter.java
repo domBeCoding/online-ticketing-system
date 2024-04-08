@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 public class MoviesWriter extends FileWriter<Movie> {
 
     public MoviesWriter() {
-        super("/Users/DPU09/Documents/University/online-ticketing-service/src/main/resources/movies.json", Movie.class);
+        super(Movie.class);
     }
 
     public void edit(String movieName, String field, String value) {
