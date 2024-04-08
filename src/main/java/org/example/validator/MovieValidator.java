@@ -2,9 +2,7 @@ package org.example.validator;
 
 import java.util.List;
 
-import static org.example.validator.Validator.*;
-
-public class MovieValidator {
+public class MovieValidator extends Validator{
     public static boolean validateFields(String movieName, List<String> availableTimes, String startDate, String airingDays, String length, String rating, String price) {
         return validateStringField(movieName)
                 && validateTimes(availableTimes)

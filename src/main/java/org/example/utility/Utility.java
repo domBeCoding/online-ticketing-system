@@ -2,7 +2,7 @@ package org.example.utility;
 
 import java.util.List;
 
-public class Utility<T> {
+public class Utility {
 
     public static void printSpace() {
         System.out.println("");

@@ -7,17 +7,16 @@ import org.example.model.*;
 import org.example.service.CinemaService;
 import org.example.service.CustomerService;
 import org.example.service.MovieService;
+import org.example.utility.InputReader;
+import org.example.utility.Utility;
 import org.example.validator.CardValidator;
 import org.example.validator.SeatValidator;
+import org.example.validator.TicketValidator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.example.utility.InputReader.read;
-import static org.example.utility.Utility.*;
-import static org.example.validator.TicketValidator.validateFields;
 
 public class CustomerController {
     boolean ticketAgentRights;
@@ -49,7 +48,7 @@ public class CustomerController {
                 getTicketsController();
                 break;
             case "3":
-                printMessage("Logging off...");
+                Utility.printMessage("Logging off...");
                 break;
             default:
                 break;
@@ -57,13 +56,13 @@ public class CustomerController {
     }
 
     private void getMoviesController() {
-        printHeaderMessage("Movies available:");
+        Utility.printHeaderMessage("Movies available:");
         movieService.getMovies()
                 .forEach(x -> {
-                    printSpace();
+                    Utility.printSpace();
                     System.out.println("Movie: " + x.getName());
-                    printMessage("Date: " + x.getAvailableDates());
-                    printMessage("Time: " + x.getAvailableTimes());
+                    Utility.printMessage("Date: " + x.getAvailableDates());
+                    Utility.printMessage("Time: " + x.getAvailableTimes());
                 });
     }
 
@@ -78,26 +77,26 @@ public class CustomerController {
 
         while (!madeDecision) {
 
-            String option = outputMenuAndReadResponse(movieOptions);
+            String option = Utility.outputMenuAndReadResponse(movieOptions);
             if (option.equals("2")) {
                 break;
             }
 
-            printMessage("Please enter the name of the movie you'd like to buy tickets for");
-            String movieName = read();
-            printMessage("Please enter the date you'd like to watch the movie in 'dd-MM-yy' format");
-            String date = read();
-            printMessage("Please enter the time you'd like to watch the movie in 'hh:mm' 24h format");
-            String time = read();
+            Utility.printMessage("Please enter the name of the movie you'd like to buy tickets for");
+            String movieName = InputReader.read();
+            Utility.printMessage("Please enter the date you'd like to watch the movie in 'dd-MM-yy' format");
+            String date = InputReader.read();
+            Utility.printMessage("Please enter the time you'd like to watch the movie in 'hh:mm' 24h format");
+            String time = InputReader.read();
 
-            printSpace();
+            Utility.printSpace();
             try {
-                validateFields(movieName, time, date);
+                TicketValidator.validateFields(movieName, time, date);
                 movie = movieService.getMovieByName(movieName);
                 movieService.checkMovieExistsForDateAndTime(movie, date, time);
                 cinemaService.populateSeats(movie, date, time);
             } catch (IllegalArgumentException | NoSuchMovieException e) {
-                printMessage(e.getMessage());
+                Utility.printMessage(e.getMessage());
                 continue;
             }
 
@@ -105,9 +104,9 @@ public class CustomerController {
 
             while(!pickedValidSeat){
 
-                printSpace();
-                printMessage("Please pick the seats you'd like to buy, seperated by commas: (Number first, then Letter - ie. 3F)");
-                String seatInput = read();
+                Utility.printSpace();
+                Utility.printMessage("Please pick the seats you'd like to buy, seperated by commas: (Number first, then Letter - ie. 3F)");
+                String seatInput = InputReader.read();
                 try{
                     seats.addAll(Arrays.stream(seatInput.trim().split(","))
                             .map(String::trim)
@@ -127,12 +126,12 @@ public class CustomerController {
             if (!ticketAgentRights) {
                 while(!madePayment){
 
-                    printHeaderMessage("Payment portal:");
-                    printMessage("Please enter your card number:");
-                    String cardNumber = read();
+                    Utility.printHeaderMessage("Payment portal:");
+                    Utility.printMessage("Please enter your card number:");
+                    String cardNumber = InputReader.read();
 
-                    printMessage("Please enter your card pin:");
-                    String cardPin = read();
+                    Utility.printMessage("Please enter your card pin:");
+                    String cardPin = InputReader.read();
 
                     try{
                         CardValidator.validate(cardNumber, cardPin);
@@ -141,28 +140,34 @@ public class CustomerController {
 
                         customerService.buyTicket(movieName, newBooking, transaction);
                     } catch (NoSuchAccountException | IllegalArgumentException e) {
-                        printMessage(e.getMessage());
-                        printMessage("Please try again");
+                        Utility.printMessage(e.getMessage());
+                        Utility.printMessage("Please try again");
                         continue;
                     }
                     madePayment = true;
                 }
+            } else {
+                try{
+                    Booking newBooking = new Booking(date, time, seats);
+                    customerService.addTicket(movieName, newBooking);
+                } catch (RuntimeException e) {
+                    Utility.printMessage(e.getMessage());
+                    continue;
+                }
             }
 
             try{
-                Booking newBooking = new Booking(date, time, seats);
-                customerService.addTicket(movieName, newBooking);
                 seats.forEach(cinemaService::bookSeat);
                 movieService.addBooking(movieName, new Booking(date,time,seats));
-            } catch (RuntimeException e) {
-                printMessage(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                Utility.printMessage(e.getMessage());
                 continue;
             }
 
-            printSpace();
-            printMessage("Tickets bought successfully");
-            printMessage("Ticket bought for: " + movieName + " on " + date + " at " + time + " for seats: " + seats);
-            printSpace();
+            Utility.printSpace();
+            Utility.printMessage("Tickets bought successfully");
+            Utility.printMessage("Ticket bought for: " + movieName + " on " + date + " at " + time + " for seats: " + seats);
+            Utility.printSpace();
 
             cinemaService.displaySeats();
 
@@ -174,8 +179,8 @@ public class CustomerController {
     private void getTicketsController() {
         List<Ticket> tickets = customerService.getTickets(sessionAccount.getUserId());
 
-        printHeaderMessage("Your tickets:");
-        if (tickets.isEmpty()) printMessage("No tickets found");
-        tickets.forEach(x -> printMessage(x.toString()));
+        Utility.printHeaderMessage("Your tickets:");
+        if (tickets.isEmpty()) Utility.printMessage("No tickets found");
+        tickets.forEach(x -> Utility.printMessage(x.toString()));
     }
 }

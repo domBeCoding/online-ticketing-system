@@ -2,11 +2,10 @@ package org.example.controller;
 
 import org.example.exception.NoSuchAccountException;
 import org.example.service.ManagementService;
+import org.example.utility.Utility;
 
 import static org.example.utility.InputReader.read;
 import static org.example.utility.InputReader.readYesOrNo;
-import static org.example.utility.Utility.printMessage;
-import static org.example.utility.Utility.printSpace;
 
 public class TicketAgentController {
     private ManagementService managementService = new ManagementService();
@@ -35,7 +34,7 @@ public class TicketAgentController {
         boolean finishedBuying = false;
 
         while (!finishedBuying) {
-            printMessage("Please enter the userId of the Customer you would like to buy tickets for");
+            Utility.printMessage("Please enter the userId of the Customer you would like to buy tickets for");
             String userId = read();
 
             try {
@@ -46,8 +45,8 @@ public class TicketAgentController {
                 continue;
             }
 
-            printSpace();
-            printMessage("Would you like to buy tickets for another customer? (y/n)");
+            Utility.printSpace();
+            Utility.printMessage("Would you like to buy tickets for another customer? (y/n)");
             if (readYesOrNo()) {
                 continue;
             }
@@ -60,7 +59,7 @@ public class TicketAgentController {
         boolean finishedOperation = false;
 
         while (!finishedOperation) {
-            printMessage("Please enter the userId of the Customer you would like to see tickets for");
+            Utility.printMessage("Please enter the userId of the Customer you would like to see tickets for");
             String userId = read();
 
             try {
@@ -72,8 +71,8 @@ public class TicketAgentController {
                 continue;
             }
 
-            printSpace();
-            printMessage("Would you like to view tickets for another customer? (y/n)");
+            Utility.printSpace();
+            Utility.printMessage("Would you like to view tickets for another customer? (y/n)");
             if (readYesOrNo()) {
                 continue;
             }
@@ -84,13 +83,13 @@ public class TicketAgentController {
     }
 
     private void getAllTickets() {
-        printSpace();
-        printMessage("All Purchased tickets:");
-        printSpace();
+        Utility.printSpace();
+        Utility.printMessage("All Purchased tickets:");
+        Utility.printSpace();
         managementService.getCustomers().forEach(customer -> {
             System.out.println(customer.getUserId() + ":");
             System.out.println(customer.getPurchasedTickets());
-            printSpace();
+            Utility.printSpace();
         });
     }
 
